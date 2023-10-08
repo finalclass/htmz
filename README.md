@@ -127,7 +127,7 @@ pub fn main() {
 
 ### "type=" issue
 
-The "type" is a keyword in gleam, so you can't use it as a field name. You can use "type_" instead.
+The "type" is a keyword in gleam, so you can't use it as a field name. Use "type_" instead.
 
 ```gleam
 Input
@@ -177,7 +177,7 @@ All [Alpine.js](https://alpinejs.dev/) attributes are supported.
 ```gleam
 Div
 |> z.x_data("{ username: 'calebporzio' }")
-|>  z.children([
+|> z.children([
   Text("Username: "),
   Strong
   |> z.x_text("username"),
@@ -192,13 +192,13 @@ Text is just a Text node but it has a value parameter. You can insert text nodes
 Div |> z.child(Text("Hello World"))
 ```
 
-However, since this is a common operation, you can also use the `text` function:
+However, since this is a common operation, there is a `text(el: Htmz, value: String)` helper function:
 
 ```gleam
 Div |> z.text("Hello World")
 ```
 
-The `z.text` does exactly the same thing as the previous example.
+The `z.text()` does exactly the same thing as the previous example.
 
 ### Conditions
 
