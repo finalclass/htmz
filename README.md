@@ -23,6 +23,8 @@ Its documentation can be found at <https://hexdocs.pm/htmz>.
 
 ## Usage
 
+### Examples
+
 ```gleam
 import htmz.{Html, Title, Head, Body, Div} as z
 import gleam/io
@@ -44,6 +46,40 @@ pub fn main() {
 }
 ```
 
+```gleam
+fn nav(inner: Htmz) -> Htmz {
+  Z(".admins")
+  |> z.children([
+    Header
+    |> z.children([
+      H2
+      |> z.text("Administratorzy"),
+      Menu
+      |> z.class("sub-menu")
+      |> z.hx_target("#admins-main")
+      |> z.hx_push_url("true")
+      |> z.hx_indicator("#indicator")
+      |> z.hx_sync("closest menu:replace")
+      |> z.children([
+        Li
+        |> z.child(
+          Button
+          |> z.hx_get("/admin/admins")
+          |> z.text("Lista"),
+        ),
+        Li
+        |> z.child(
+          Button
+          |> z.hx_get("/admin/admins/new")
+          |> z.text("Dodaj"),
+        ),
+      ]),
+    ]),
+    Z("article#admins-main")
+    |> z.child(inner),
+  ])
+}
+```
 
 ```gleam
 
