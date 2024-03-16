@@ -3,7 +3,7 @@ import gleam/io
 import gleam/list
 import gleam/iterator
 import gleam/string
-import gleam/option.{None, Option, Some, map}
+import gleam/option.{type Option, None, Some, map}
 
 pub type ParseResult {
   ParseResult(tag_name: String, attrs: List(#(String, String)))
@@ -65,7 +65,8 @@ pub fn parse_css_selector(css_selector: String) -> Option(ParseResult) {
           }
 
           let cls =
-            class_in_attr <> {
+            class_in_attr
+            <> {
               acc.classes
               |> list.unique()
               |> list.reverse()
@@ -130,16 +131,14 @@ fn process_char(acc: ParseAcc, char: String) -> Option(ParseAcc) {
       map(finish_prefix(acc), fn(acc) { ParseAcc(..acc, symbol_type: Class) })
 
     "[" ->
-      map(
-        finish_prefix(acc),
-        fn(acc) { ParseAcc(..acc, symbol_type: AttributeName) },
-      )
+      map(finish_prefix(acc), fn(acc) {
+        ParseAcc(..acc, symbol_type: AttributeName)
+      })
 
     "=" ->
-      map(
-        finish_prefix(acc),
-        fn(acc) { ParseAcc(..acc, symbol_type: AttributeValue) },
-      )
+      map(finish_prefix(acc), fn(acc) {
+        ParseAcc(..acc, symbol_type: AttributeValue)
+      })
 
     "]" ->
       map(finish_prefix(acc), fn(acc) { ParseAcc(..acc, symbol_type: Tag) })
