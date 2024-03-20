@@ -3,7 +3,7 @@ import gleam/io
 import gleam/list
 import gleam/iterator
 import gleam/string
-import gleam/option.{None, Option, Some, map}
+import gleam/option.{None, type Option, Some, map}
 
 pub type ParseResult {
   ParseResult(tag_name: String, attrs: List(#(String, String)))
