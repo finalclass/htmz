@@ -1,7 +1,7 @@
-import htmz/selector_parser.{ParseResult, parse_css_selector}
-import gleam/string
 import gleam/list as gleam_list
 import gleam/option.{Some}
+import gleam/string
+import htmz/selector_parser.{ParseResult, parse_css_selector}
 
 pub type Attr {
   Attr(name: String, value: String)
@@ -183,9 +183,14 @@ pub fn to_string(el: Htmz) -> String {
         }
 
         _ -> {
-          "<" <> tag <> attrs_to_string(attrs) <> ">\n" <> children_to_string(
-            children,
-          ) <> "</" <> tag <> ">"
+          "<"
+          <> tag
+          <> attrs_to_string(attrs)
+          <> ">\n"
+          <> children_to_string(children)
+          <> "</"
+          <> tag
+          <> ">"
         }
       }
     }
